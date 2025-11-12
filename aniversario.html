@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestra Historia de Amor 💖</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #ffb6c1, #ff69b4);
+    animation: backgroundShift 8s infinite alternate;
+    color: #fff;
+    text-align: center;
+    height: 100vh;
+  }
+
+  @keyframes backgroundShift {
+    0% { background: linear-gradient(120deg, #ffb6c1, #ff69b4); }
+    50% { background: linear-gradient(120deg, #ff69b4, #ffb6c1); }
+    100% { background: linear-gradient(120deg, #ffb6c1, #ff69b4); }
+  }
+
+  .hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .heart {
+    position: absolute;
+    bottom: -10px;
+    color: #ffdde1;
+    font-size: 20px;
+    opacity: 0.7;
+    animation: floatUp linear forwards;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Pantalla de inicio */
+  #inicio {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    padding: 2rem;
+    transition: opacity 1s ease;
+  }
+
+  #inicio h1 {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    line-height: 1.4;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #ff69b4;
+  }
+
+  #iniciarBtn {
+    background-color: #fff;
+    color: #ff69b4;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    z-index: 20;
+  }
+
+  #iniciarBtn:hover, #iniciarBtn:active {
+    background-color: #ff69b4;
+    color: #fff;
+    transform: scale(1.1);
+  }
+
+  /* Contenedor principal */
+  #contenido {
+    display: none;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    position: relative;
+    padding: 20px;
+  }
+
+  .card {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px auto;
+    width: 90%;
+    max-width: 400px;
+    font-size: 1.1rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+  }
+
+  .card.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #nextBtn {
+    margin-top: 20px;
+    background-color: #fff;
+    color: #ff69b4;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+  }
+
+  #nextBtn:hover, #nextBtn:active {
+    background-color: #ff69b4;
+    color: #fff;
+    transform: scale(1.05);
+  }
+
+  #final {
+    display: none;
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: bold;
+    text-shadow: 0 0 15px #fff;
+    animation: heartbeat 1.2s infinite;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+  }
+</style>
+</head>
+<body>
+
+<div class="hearts"></div>
+
+<div id="inicio">
+  <h1>Nuestra historia de amor 💖<br>3 años y 5 meses de aventuras y amor infinito</h1>
+  <button id="iniciarBtn">Iniciar</button>
+</div>
+
+<div id="contenido">
+  <div id="cardsContainer"></div>
+  <button id="nextBtn">Siguiente 💕</button>
+  <div id="final">TE AMOOOOO 💘</div>
+</div>
+
+<script>
+  // Función para generar corazones animados
+  function crearCorazones() {
+    const heartsContainer = document.querySelector('.hearts');
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '💖';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (3 + Math.random() * 5) + 's';
+      heart.style.fontSize = (16 + Math.random() * 24) + 'px';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }, 300);
+  }
+
+  crearCorazones();
+
+  const inicio = document.getElementById('inicio');
+  const iniciarBtn = document.getElementById('iniciarBtn');
+  const contenido = document.getElementById('contenido');
+  const cardsContainer = document.getElementById('cardsContainer');
+  const nextBtn = document.getElementById('nextBtn');
+  const finalText = document.getElementById('final');
+
+  const mensajes = [
+    "Desde aquel primer día supe que serías alguien especial 💫",
+    "Cada momento contigo se convierte en mi favorito ❤️",
+    "Tu sonrisa ilumina incluso mis días más grises ☀️",
+    "No hay distancia ni tiempo que nos separe 💌",
+    "Amarte es mi aventura favorita 🌍",
+    "Gracias por tanto amor y paciencia 💐",
+    "Eres mi lugar seguro y mi más bonita casualidad 💞",
+    "Contigo aprendí lo que realmente es el amor 💖",
+    "Cada mes contigo es un nuevo capítulo de nuestra historia 📖",
+    "Y hoy, después de 3 años y 5 meses... sigo eligiéndote 💍"
+  ];
+
+  let index = 0;
+
+  function mostrarCard(i) {
+    cardsContainer.innerHTML = "";
+    const card = document.createElement('div');
+    card.classList.add('card', 'active');
+    card.textContent = mensajes[i];
+    cardsContainer.appendChild(card);
+  }
+
+  iniciarBtn.addEventListener('touchstart', iniciarAnimacion, false);
+  iniciarBtn.addEventListener('click', iniciarAnimacion, false);
+
+  function iniciarAnimacion() {
+    inicio.style.opacity = '0';
+    setTimeout(() => {
+      inicio.style.display = 'none';
+      contenido.style.display = 'flex';
+      mostrarCard(index);
+    }, 800);
+  }
+
+  nextBtn.addEventListener('click', () => {
+    index++;
+    if (index < mensajes.length) {
+      mostrarCard(index);
+    } else {
+      cardsContainer.innerHTML = '';
+      nextBtn.style.display = 'none';
+      finalText.style.display = 'block';
+    }
+  });
+</script>
+</body>
+</html>
